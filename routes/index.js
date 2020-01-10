@@ -23,6 +23,27 @@ client.connect((err, connection) => {
     });
   });
 
+  router.get('/notes', (req, res) => {
+    db.collection('notes').find({}).toArray((err, notes) => {
+      res.send({ notes });
+    })
+  })
+
+  router.post('/notes', (req, res) => {
+    db.collection('notes').insertOne(req.body, (err, resp) => {
+
+      if (err) return res.json({ status: 500, err });
+
+      res.json({ message: 'insert successful', status: 201 })
+
+    })
+  })
+
+  router.put('/notes', (req, res) => {
+
+    // db.collection('notes').findOneAndUpdate(req.body._id,)
+    res.json({ message: 'note updated' })
+  })
 });
 
 module.exports = router;
