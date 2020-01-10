@@ -1,7 +1,8 @@
-require('dotenv').config()
+require('dotenv').config();
 const express = require('express');
+
 const router = express.Router();
-const MongoClient = require('mongodb').MongoClient;
+const { MongoClient } = require('mongodb');
 
 // check authentication and route them to different place based on if authentication middleware returns true or false
 
@@ -10,18 +11,17 @@ const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWOR
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect((err, connection) => {
-
-  if (err) console.error(err);
+  if (err) return console.error(err);
   if (connection) console.log('Successfully connected! \n');
 
 
-  const db = client.db("test");
+  const db = client.db('test');
 
-  db.collection('keys').find({}).toArray((err, rec) => {
-    router.get('/', function (req, res, next) {
+  router.get('/', (req, res) => {
+    db.collection('keys').find({}).toArray((err, rec) => {
       res.send({ status: 'We\'re Online!', rec });
     });
-  })
+  });
 
 });
 
