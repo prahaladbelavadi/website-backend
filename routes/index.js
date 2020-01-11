@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-
+const notes = require('../controllers/notes')
 const router = express.Router();
 const { MongoClient } = require('mongodb');
 
@@ -24,25 +24,15 @@ client.connect((err, connection) => {
   });
 
   router.get('/notes', (req, res) => {
-    db.collection('notes').find({}).toArray((err, notes) => {
-      res.send({ notes });
-    })
+    notes.fetchAllNotes(req, res);
   })
 
   router.post('/notes', (req, res) => {
-    db.collection('notes').insertOne(req.body, (err, resp) => {
-
-      if (err) return res.json({ status: 500, err });
-
-      res.json({ message: 'insert successful', status: 201 })
-
-    })
+    notes.addNote(req, res);
   })
 
   router.put('/notes', (req, res) => {
-
-    // db.collection('notes').findOneAndUpdate(req.body._id,)
-    res.json({ message: 'note updated' })
+    notes.updateNote(req, res);
   })
 });
 
