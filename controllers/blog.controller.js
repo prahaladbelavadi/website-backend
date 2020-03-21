@@ -1,14 +1,13 @@
-const Blogpostpost = require('../models/blog.model');
+const Blogpost = require('../models/blog.model');
 
 exports.fetchAllBlogposts = async (req, res, next) => {
-
   Blogpost.find({}, (err, blogs) => {
     if (err) {
       return res.json({
         stauts: 'Error Occurred while searching for Blogposts'
       });
     }
-    res.json(resources);
+    res.json(blogs);
   });
 };
 

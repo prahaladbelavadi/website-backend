@@ -7,7 +7,7 @@ require('dotenv').config();
 const userRouter = require('./routes/users.route');
 const resourceRouter = require('./routes/resources.route');
 const uploadRouter = require('./routes/uploadRouter');
-
+const blogRouter = require('./routes/blogs.route');
 const app = express();
 
 // handle cors
@@ -33,11 +33,10 @@ app.use(function(req, res, next) {
   next();
 });
 
+const URI = `mongodb+srv://${process.env.MONGO_ATLAS_USERNAME}:${process.env.MONGO_ATLAS_PASSWORD}@${process.env.MONGO_ATLAS_CLUSTER}/${process.env.DB_NAME}`;
+
 mongoose
-  .connect(
-    `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_ATLAS_PW}@${process.env.MONGO_ATLAS_CLUSTER}/${process.env.DB_NAME}`,
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
+  .connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to database!');
   })
@@ -48,7 +47,8 @@ mongoose
 app.get('/', (req, res) => res.send('Server is up and running!'));
 
 app.use('/users', userRouter);
-app.use('/resources', resourceRouter);
+app.use('/blogs', blogRouter);
+// app.use('/resources', resourceRouter);
 app.use('/upload', uploadRouter);
 
 const port = process.env.port || 3000;

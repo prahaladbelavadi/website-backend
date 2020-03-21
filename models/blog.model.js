@@ -7,7 +7,7 @@ const blogpostSchema = new Schema(
     description: { type: String, required: true },
     references: { type: [String] },
     author: {
-      type: mongoose.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'User'
     }

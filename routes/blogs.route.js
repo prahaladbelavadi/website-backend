@@ -7,13 +7,13 @@ const authenticate = require('../middlewares/authenticate');
 const router = express.Router();
 
 // Create a blog post
-    // From the website
-    // From Quora
-    // From Medium
+    // From the website : Only so far
+    // From Quora : Later
+    // From Medium : Later
 
-    // Paginate
-    // Original source of where the blog post was made
-    // Filter based on date, source and tags
+    // Paginate : Later
+    // Original source of where the blog post was made : Most likely the website
+    // Filter based on date, source and tags : later
 
 router.get('', 
 // authenticate.who,
