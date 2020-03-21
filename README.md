@@ -3,8 +3,9 @@ Repo for belavadi.com backend
 
 # StoryBoard
 
-- [ ] Blog
-- [ ] Learning
-- [ ] Projects
-- [ ] Newsletter
-- [ ] Terminal
+- Resources
+  - [ ] Blog
+  - [ ] Learning
+  - [ ] Projects
+  - [ ] Newsletter
+  - [ ] Terminal
